@@ -23,7 +23,7 @@ router.get('/books', (req, res) => {
 router.get('/books/:id', (req, res) => {
     const id = Number(req.params.id);
     knex("books")
-        .then('id', id)
+        .where('id', id)
         .then((book) => {
             res.send(camelizeKeys(book[0]));
         })
