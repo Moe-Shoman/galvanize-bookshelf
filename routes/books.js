@@ -24,8 +24,8 @@ router.get('/books/:id', (req, res) => {
     const id = Number(req.params.id);
     knex("books")
         .where('id', id)
-        .then((book) => {
-            res.send(camelizeKeys(book[0]));
+        .then((books) => {
+            res.send(camelizeKeys(books[0]));
         })
         .catch((err) => {
             res.sendStatus(404);
@@ -50,7 +50,7 @@ router.patch('/books/:id', (req, res, next) => {
     const id = Number(req.params.id);
     const updateBook = {};
     Object.keys(req.body).forEach((key) => {
-        updateBook[key] = req.body[key]
+        updateBook[key] = req.body[key];
     });
     knex("books")
         .where("id", id)
@@ -90,7 +90,7 @@ router.delete('/books/:id', (req, res, next) => {
             res.send(camelizeKeys(book));
         })
         .catch((err) => {
-            next(err);
+            res.sendStatus(500);
         });
 });
 
